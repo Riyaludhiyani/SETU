@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.auth-selection-container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eaf3ff 0%, #f8fafc 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  position: relative;
+}
+
+.auth-selection-container::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(30, 136, 229, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.auth-selection-content {
+  max-width: 1000px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.back-btn {
+  background: white;
+  border: 1px solid rgba(30, 136, 229, 0.2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  color: #1e88e5;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.back-btn:hover {
+  background: #1e88e5;
+  color: white;
+  border-color: #1e88e5;
+  transform: translateX(-5px);
+}
+
+.auth-title {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  animation: fadeInUp 0.6s ease;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: #64748b;
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  animation: fadeInUp 0.6s ease 0.2s backwards;
+}
+
+.auth-card-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  animation: fadeInUp 0.6s ease 0.4s backwards;
+}
+
+.auth-portal-card {
+  background: white;
+  width: 100%;
+  max-width: 400px;
+  padding: 0;
+  border-radius: 16px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.auth-portal-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.card-top {
+  padding: 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-top.customer {
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+}
+
+.card-top.agency {
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+}
+
+.card-top::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+}
+
+.card-icon {
+  font-size: 4rem;
+  position: relative;
+  z-index: 1;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.auth-portal-card h3 {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 1.5rem 1.5rem 1rem;
+}
+
+.auth-portal-card p {
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0 1.5rem 2rem;
+  font-size: 0.95rem;
+}
+
+.access-btn {
+  width: calc(100% - 3rem);
+  margin: 0 1.5rem 1.5rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: white;
+}
+
+.customer-btn {
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+  box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3);
+}
+
+.customer-btn:hover {
+  box-shadow: 0 6px 20px rgba(30, 136, 229, 0.4);
+  transform: translateY(-2px);
+}
+
+.agency-btn {
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+}
+
+.agency-btn:hover {
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+  transform: translateY(-2px);
+}
+
+.help-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s ease 0.6s backwards;
+}
+
+.help-box h4 {
+  font-family: 'Clash Display', sans-serif;
+  font-size: 1.3rem;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.help-box p {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.help-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.help-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e2e8f0;
+  background: white;
+  border-radius: 8px;
+  color: #64748b;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.help-btn:hover {
+  border-color: #1e88e5;
+  color: #1e88e5;
+  transform: translateY(-2px);
+}
+
+.auth-switch {
+  text-align: center;
+  animation: fadeInUp 0.6s ease 0.8s backwards;
+}
+
+.auth-switch p {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.switch-link {
+  background: none;
+  border: none;
+  color: #1e88e5;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  text-decoration: underline;
+  font-size: 0.95rem;
+}
+
+.switch-link:hover {
+  color: #42a5f5;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .auth-title {
+    font-size: 2rem;
+  }
+
+  .auth-subtitle {
+    font-size: 1rem;
+  }
+
+  .auth-card-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .auth-portal-card {
+    max-width: 100%;
+  }
+
+  .help-buttons {
+    flex-direction: column;
+  }
+
+  .help-btn {
+    width: 100%;
+  }
+}
