@@ -44,27 +44,27 @@ const AgencyDashboard = () => {
         </div>
 
         <nav className="sidebar-nav">
-          <a href="#" className="nav-item active">
+          <a href="#" className="nav-item active" onClick={() => navigate('/dashboard/agency')}>
             <span className="nav-icon">🏠</span>
             <span>Dashboard</span>
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={() => navigate('/my-products')}>
             <span className="nav-icon">📦</span>
             <span>My Products</span>
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={() => navigate('/add-product')}>
             <span className="nav-icon">➕</span>
             <span>Add Product</span>
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={() => navigate('/analytics')}>
             <span className="nav-icon">📊</span>
             <span>Analytics</span>
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={() => navigate('/messages')}>
             <span className="nav-icon">💬</span>
             <span>Messages</span>
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={() => navigate('/settings')}>
             <span className="nav-icon">⚙️</span>
             <span>Settings</span>
           </a>
@@ -142,19 +142,19 @@ const AgencyDashboard = () => {
               <div className="action-icon">➕</div>
               <h3>Add New Product</h3>
               <p>List seized goods for auction</p>
-              <button className="action-btn agency-btn">Add Product</button>
+              <button className="action-btn agency-btn" onClick={() => navigate('/add-product')}>Add Product</button>
             </div>
             <div className="action-card">
               <div className="action-icon">📊</div>
               <h3>View Analytics</h3>
               <p>Track your performance metrics</p>
-              <button className="action-btn agency-btn">View Report</button>
+              <button className="action-btn agency-btn" onClick={() => navigate('/analytics')}>View Report</button>
             </div>
             <div className="action-card">
               <div className="action-icon">📝</div>
               <h3>Pending Approvals</h3>
               <p>Review items waiting for approval</p>
-              <button className="action-btn agency-btn">View Queue</button>
+              <button className="action-btn agency-btn" onClick={() => navigate('/my-products')}>View Queue</button>
             </div>
           </div>
         </section>

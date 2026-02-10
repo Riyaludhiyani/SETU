@@ -5,6 +5,8 @@ import SignupForm from './AuthForm/SignupForm';
 import LoginForm from './AuthForm/LoginForm';
 import CustomerDashboard from './Dashboard/CustomerDashboard';
 import AgencyDashboard from './Dashboard/AgencyDashboard';
+import AddProduct from './AddProduct/AddProduct';
+import MyProducts from './MyProducts/MyProducts';
 
 function App() {
   return (
@@ -26,6 +28,10 @@ function App() {
         {/* Dashboards */}
         <Route path="/dashboard/customer" element={<CustomerDashboard />} />
         <Route path="/dashboard/agency" element={<AgencyDashboard />} />
+
+        {/* Agency Product Routes */}
+        <Route path="/add-product" element={<AddProduct />} />
+        <Route path="/my-products" element={<MyProducts />} />
       </Routes>
     </Router>
   );
