@@ -6,6 +6,35 @@ import './AuthForm.css';
 const SignupForm = () => {
   const navigate = useNavigate();
   const { userType } = useParams();
+
+  // Prevent admin registration through normal signup
+  if (userType === 'admin') {
+    return (
+      <div className="auth-form-container">
+        <div className="auth-form-content">
+          <button className="back-btn" onClick={() => navigate('/signup')}>
+            ← Back to Selection
+          </button>
+          <div className="form-card">
+            <div className="form-header">
+              <div className="form-icon admin">🛡️</div>
+              <h2>Admin Registration</h2>
+              <p>Admin accounts cannot be created through public registration</p>
+            </div>
+            <div className="error-message" style={{ marginBottom: '1.5rem' }}>
+              Admin accounts must be created by an existing administrator or through the database directly.
+            </div>
+            <button
+              className="submit-btn admin"
+              onClick={() => navigate('/login/admin')}
+            >
+              Go to Admin Login
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
   const [formData, setFormData] = useState({
     name: '',
     email: '',

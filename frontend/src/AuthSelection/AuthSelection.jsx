@@ -26,11 +26,11 @@ const AuthSelection = ({ type }) => {
             </div>
             <h3>Customer Portal</h3>
             <p>
-              {isSignup 
+              {isSignup
                 ? "Create an account to browse and purchase seized goods at great prices."
                 : "Access your account information, view reports, and manage your orders."}
             </p>
-            <button 
+            <button
               className="access-btn customer-btn"
               onClick={() => navigate(isSignup ? '/signup/customer' : '/login/customer')}
             >
@@ -49,13 +49,32 @@ const AuthSelection = ({ type }) => {
                 ? "Register your agency to list seized goods and manage auctions."
                 : "Manage clients, access agency tools, and view performance metrics."}
             </p>
-            <button 
+            <button
               className="access-btn agency-btn"
               onClick={() => navigate(isSignup ? '/signup/agency' : '/login/agency')}
             >
               {isSignup ? 'Sign Up as Agency' : 'Login as Agency'}
             </button>
           </div>
+
+          {/* Admin Portal - Login Only */}
+          {!isSignup && (
+            <div className="auth-portal-card">
+              <div className="card-top admin">
+                <div className="card-icon">🛡️</div>
+              </div>
+              <h3>Admin Portal</h3>
+              <p>
+                Admin access for product approvals, user management, and platform oversight.
+              </p>
+              <button
+                className="access-btn admin-btn"
+                onClick={() => navigate('/login/admin')}
+              >
+                Login as Admin
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="help-box">
