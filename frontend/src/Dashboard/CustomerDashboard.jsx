@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import axios from 'axios';
+=======
+import api from '../services/api';
+>>>>>>> 5137482c498d5c5f1ccbf431868ddf14606f9793
 import './Dashboard.css';
 
 const CustomerDashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+<<<<<<< HEAD
   const [stats, setStats] = useState({
     activeOrders: 0,
     wishlistItems: 0,
     totalSavings: 0,
     completedOrders: 0
   });
+=======
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+>>>>>>> 5137482c498d5c5f1ccbf431868ddf14606f9793
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,6 +38,7 @@ const CustomerDashboard = () => {
     }
 
     setUser(parsedUser);
+<<<<<<< HEAD
     fetchStats(token);
   }, [navigate]);
 
@@ -63,6 +72,17 @@ const CustomerDashboard = () => {
       });
     } catch (error) {
       console.error('Failed to fetch stats:', error);
+=======
+    fetchFeaturedProducts();
+  }, [navigate]);
+
+  const fetchFeaturedProducts = async () => {
+    try {
+      const response = await api.get('/api/products/all');
+      setFeaturedProducts(response.data.slice(0, 3));
+    } catch (error) {
+      console.error('Error fetching products:', error);
+>>>>>>> 5137482c498d5c5f1ccbf431868ddf14606f9793
     } finally {
       setLoading(false);
     }
@@ -88,6 +108,7 @@ const CustomerDashboard = () => {
         </div>
 
         <nav className="sidebar-nav">
+<<<<<<< HEAD
           <button 
             onClick={() => navigate('/dashboard/customer')} 
             className="nav-item active"
@@ -127,6 +148,29 @@ const CustomerDashboard = () => {
             onClick={() => {}} 
             className="nav-item"
           >
+=======
+          <a href="#" className="nav-item active" onClick={(e) => { e.preventDefault(); navigate('/dashboard/customer'); }}>
+            <span className="nav-icon">🏠</span>
+            <span>Dashboard</span>
+          </a>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/browse-products'); }}>
+            <span className="nav-icon">🛍️</span>
+            <span>Browse Products</span>
+          </a>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/orders'); }}>
+            <span className="nav-icon">📋</span>
+            <span>My Orders</span>
+          </a>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/watchlist'); }}>
+            <span className="nav-icon">❤️</span>
+            <span>Watchlist</span>
+          </a>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/messages'); }}>
+            <span className="nav-icon">💬</span>
+            <span>Messages</span>
+          </a>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/settings'); }}>
+>>>>>>> 5137482c498d5c5f1ccbf431868ddf14606f9793
             <span className="nav-icon">⚙️</span>
             <span>Settings</span>
           </button>
@@ -202,6 +246,7 @@ const CustomerDashboard = () => {
         {/* Quick Actions */}
         <section className="dashboard-section">
           <div className="section-header">
+<<<<<<< HEAD
             <h2>Quick Actions</h2>
           </div>
           <div className="quick-actions-grid">
@@ -233,6 +278,44 @@ const CustomerDashboard = () => {
               <p>View saved products and favorites</p>
             </div>
           </div>
+=======
+            <h2>Featured Products</h2>
+            <button className="view-all-btn" onClick={() => navigate('/browse-products')}>View All →</button>
+          </div>
+          {loading ? (
+            <div className="table-loading">Loading products...</div>
+          ) : featuredProducts.length > 0 ? (
+            <div className="products-grid">
+              {featuredProducts.map((product) => (
+                <div key={product._id} className="product-card">
+                  <div className="product-badge">
+                    {Math.round(((product.originalPrice - product.sellingPrice) / product.originalPrice) * 100)}% OFF
+                  </div>
+                  <div className="product-image">
+                    {product.images && product.images.length > 0 ? (
+                      <img src={product.images[0]} alt={product.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                      '📦'
+                    )}
+                  </div>
+                  <h3>{product.title}</h3>
+                  <p>{product.description.substring(0, 60)}...</p>
+                  <div className="product-price">
+                    <span className="original-price">₹{product.originalPrice.toLocaleString()}</span>
+                    <span className="current-price">₹{product.sellingPrice.toLocaleString()}</span>
+                  </div>
+                  <button className="product-btn" onClick={() => navigate(`/product/${product._id}`)}>View Details</button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="empty-state">
+              <div className="empty-icon">📦</div>
+              <h3>No products available yet</h3>
+              <p>Check back soon for new listings</p>
+            </div>
+          )}
+>>>>>>> 5137482c498d5c5f1ccbf431868ddf14606f9793
         </section>
 
         {/* Start Shopping Section */}
@@ -248,6 +331,7 @@ const CustomerDashboard = () => {
           </div>
           <div className="activity-list">
             <div className="activity-empty">
+<<<<<<< HEAD
               <div className="empty-icon">🛍️</div>
               <h3>Ready to Shop?</h3>
               <p>Explore our marketplace of seized government goods at amazing prices</p>
@@ -257,6 +341,12 @@ const CustomerDashboard = () => {
               >
                 Browse Products
               </button>
+=======
+              <div className="empty-icon">📭</div>
+              <h3>No recent activity</h3>
+              <p>Start browsing products to see your activity here</p>
+              <button className="cta-btn" onClick={() => navigate('/browse-products')}>Browse Products</button>
+>>>>>>> 5137482c498d5c5f1ccbf431868ddf14606f9793
             </div>
           </div>
         </section>

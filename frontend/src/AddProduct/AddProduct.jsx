@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import './AddProduct.css';
 
 const AddProduct = () => {
@@ -50,21 +50,15 @@ const AddProduct = () => {
     }
 
     try {
-      const token = localStorage.getItem('token');
-      
       // Convert images string to array
       const imageUrls = formData.images ? formData.images.split(',').map(url => url.trim()) : [];
 
-      const response = await axios.post('http://localhost:5000/api/products', {
+      const response = await api.post('/api/products', {
         ...formData,
         originalPrice: Number(formData.originalPrice),
         sellingPrice: Number(formData.sellingPrice),
         quantity: Number(formData.quantity),
         images: imageUrls
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
       });
 
       setSuccess('Product added successfully! Pending admin approval.');

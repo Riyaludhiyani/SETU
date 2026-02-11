@@ -580,6 +580,7 @@
     grid-template-columns: 1fr;
   }
 }
+<<<<<<< HEAD
 
 /* Additional CSS for sidebar button navigation */
 
@@ -616,3 +617,116 @@
   display: flex;
   align-items: center;
 }
+=======
+/* Products List */
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-list-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 100px;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.product-list-item:hover {
+  background: #f1f5f9;
+}
+
+.product-info h4 {
+  margin: 0 0 0.25rem 0;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+.product-category {
+  font-size: 0.875rem;
+  color: #64748b;
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.product-price {
+  font-weight: 700;
+  color: #1e88e5;
+  font-size: 1.1rem;
+}
+
+.product-status {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.product-status.approved {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.product-status.pending {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.product-status.rejected {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.product-status.sold {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.view-btn {
+  padding: 0.5rem 1rem;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.view-btn:hover {
+  background: #6d28d9;
+}
+
+.table-loading {
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.empty-state p {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+>>>>>>> 5137482c498d5c5f1ccbf431868ddf14606f9793
