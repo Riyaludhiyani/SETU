@@ -62,7 +62,7 @@ exports.markAsRead = async (req, res) => {
             return res.status(404).json({ message: "Message not found" });
         }
 
-        if (message.agency.toString() !== req.user.id) {
+        if (!message.agency.equals(req.user.id)) {
             return res.status(403).json({ message: "Not authorized" });
         }
 
@@ -86,7 +86,7 @@ exports.replyMessage = async (req, res) => {
             return res.status(404).json({ message: "Message not found" });
         }
 
-        if (message.agency.toString() !== req.user.id) {
+        if (!message.agency.equals(req.user.id)) {
             return res.status(403).json({ message: "Not authorized" });
         }
 
@@ -115,7 +115,7 @@ exports.deleteMessage = async (req, res) => {
             return res.status(404).json({ message: "Message not found" });
         }
 
-        if (message.agency.toString() !== req.user.id) {
+        if (!message.agency.equals(req.user.id)) {
             return res.status(403).json({ message: "Not authorized" });
         }
 
