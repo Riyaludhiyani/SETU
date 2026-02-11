@@ -580,3 +580,39 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Additional CSS for sidebar button navigation */
+
+.sidebar-nav button.nav-item {
+  width: 100%;
+  text-align: left;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.sidebar-nav button.nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nav button.nav-item.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-left: 3px solid white;
+}
+
+/* Make action cards more interactive */
+.action-card {
+  transition: all 0.3s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Loading state for stats */
+.stat-value {
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+}

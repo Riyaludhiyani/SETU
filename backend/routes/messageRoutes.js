@@ -6,8 +6,8 @@ const {
     replyMessage,
     deleteMessage,
     getUnreadCount
-} = require("../controllers/messageController");
-const authMiddleware = require("../middleware/authMiddleware");
+} = require("../controllers/messageController.js");
+const authMiddleware = require("../middleware/authMiddleware.js");
 
 // Customer routes
 router.post("/", authMiddleware(['customer']), sendMessage);

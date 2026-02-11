@@ -13,6 +13,7 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/products", require("./routes/productRoutes"));
 app.use("/api/messages", require("./routes/messageRoutes"));
+app.use("/api/customer", require("./routes/customerRoutes"));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/setu")

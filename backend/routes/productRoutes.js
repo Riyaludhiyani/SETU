@@ -7,8 +7,8 @@ const {
     deleteProduct,
     getAnalytics,
     getAllProducts
-} = require("../controllers/productController");
-const authMiddleware = require("../middleware/authMiddleware");
+} = require("../controllers/productController.js");
+const authMiddleware = require("../middleware/authMiddleware.js");
 
 // Public routes
 router.get("/all", getAllProducts); // For customers to browse

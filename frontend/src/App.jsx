@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './LandingPage/LandingPage';
-import AuthSelection from './AuthSelection/AuthSelection';
-import SignupForm from './AuthForm/SignupForm';
-import LoginForm from './AuthForm/LoginForm';
-import CustomerDashboard from './Dashboard/CustomerDashboard';
-import AgencyDashboard from './Dashboard/AgencyDashboard';
-import AddProduct from './AddProduct/AddProduct';
-import MyProducts from './MyProducts/MyProducts';
+import LandingPage from './LandingPage/LandingPage.jsx';
+import AuthSelection from './AuthSelection/AuthSelection.jsx';
+import SignupForm from './AuthForm/SignupForm.jsx';
+import LoginForm from './AuthForm/LoginForm.jsx';
+import CustomerDashboard from './Dashboard/CustomerDashboard.jsx';
+import AgencyDashboard from './Dashboard/AgencyDashboard.jsx';
+import AddProduct from './AddProduct/AddProduct.jsx';
+import MyProducts from './MyProducts/MyProducts.jsx';
 
 function App() {
   return (

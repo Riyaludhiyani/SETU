@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Dashboard.css';
 
 const CustomerDashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [stats, setStats] = useState({
+    activeOrders: 0,
+    wishlistItems: 0,
+    totalSavings: 0,
+    completedOrders: 0
+  });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -22,7 +30,43 @@ const CustomerDashboard = () => {
     }
 
     setUser(parsedUser);
+    fetchStats(token);
   }, [navigate]);
+
+  const fetchStats = async (token) => {
+    try {
+      // Fetch orders
+      const ordersRes = await axios.get('http://localhost:5000/api/customer/orders', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const orders = ordersRes.data;
+      
+      // Fetch wishlist
+      const wishlistRes = await axios.get('http://localhost:5000/api/customer/wishlist', {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      // Calculate stats
+      const activeOrders = orders.filter(o => 
+        ['confirmed', 'processing', 'shipped'].includes(o.orderStatus)
+      ).length;
+      
+      const completedOrders = orders.filter(o => o.orderStatus === 'delivered').length;
+      
+      const totalSavings = orders.reduce((sum, order) => sum + (order.totalSavings || 0), 0);
+      
+      setStats({
+        activeOrders,
+        wishlistItems: wishlistRes.data.products?.length || 0,
+        totalSavings,
+        completedOrders
+      });
+    } catch (error) {
+      console.error('Failed to fetch stats:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -44,30 +88,48 @@ const CustomerDashboard = () => {
         </div>
 
         <nav className="sidebar-nav">
-          <a href="#" className="nav-item active">
+          <button 
+            onClick={() => navigate('/dashboard/customer')} 
+            className="nav-item active"
+          >
             <span className="nav-icon">🏠</span>
             <span>Dashboard</span>
-          </a>
-          <a href="#" className="nav-item">
+          </button>
+          <button 
+            onClick={() => navigate('/browse-products')} 
+            className="nav-item"
+          >
             <span className="nav-icon">🛍️</span>
             <span>Browse Products</span>
-          </a>
-          <a href="#" className="nav-item">
+          </button>
+          <button 
+            onClick={() => navigate('/my-orders')} 
+            className="nav-item"
+          >
             <span className="nav-icon">📋</span>
             <span>My Orders</span>
-          </a>
-          <a href="#" className="nav-item">
+          </button>
+          <button 
+            onClick={() => navigate('/wishlist')} 
+            className="nav-item"
+          >
             <span className="nav-icon">❤️</span>
-            <span>Watchlist</span>
-          </a>
-          <a href="#" className="nav-item">
-            <span className="nav-icon">💬</span>
-            <span>Messages</span>
-          </a>
-          <a href="#" className="nav-item">
+            <span>Wishlist</span>
+          </button>
+          <button 
+            onClick={() => navigate('/cart')} 
+            className="nav-item"
+          >
+            <span className="nav-icon">🛒</span>
+            <span>Cart</span>
+          </button>
+          <button 
+            onClick={() => {}} 
+            className="nav-item"
+          >
             <span className="nav-icon">⚙️</span>
             <span>Settings</span>
-          </a>
+          </button>
         </nav>
 
         <div className="sidebar-footer">
@@ -87,6 +149,9 @@ const CustomerDashboard = () => {
             <p>Discover great deals on seized government goods</p>
           </div>
           <div className="header-actions">
+            <button className="header-btn" onClick={() => navigate('/cart')}>
+              <span>🛒</span>
+            </button>
             <button className="header-btn">
               <span>🔔</span>
             </button>
@@ -105,87 +170,93 @@ const CustomerDashboard = () => {
           <div className="stat-card">
             <div className="stat-icon customer">🛍️</div>
             <div className="stat-info">
-              <div className="stat-value">0</div>
+              <div className="stat-value">{loading ? '...' : stats.activeOrders}</div>
               <div className="stat-label">Active Orders</div>
             </div>
           </div>
           <div className="stat-card">
             <div className="stat-icon customer">❤️</div>
             <div className="stat-info">
-              <div className="stat-value">0</div>
-              <div className="stat-label">Watchlist Items</div>
+              <div className="stat-value">{loading ? '...' : stats.wishlistItems}</div>
+              <div className="stat-label">Wishlist Items</div>
             </div>
           </div>
           <div className="stat-card">
             <div className="stat-icon customer">💰</div>
             <div className="stat-info">
-              <div className="stat-value">₹0</div>
+              <div className="stat-value">
+                {loading ? '...' : `₹${stats.totalSavings.toLocaleString()}`}
+              </div>
               <div className="stat-label">Total Savings</div>
             </div>
           </div>
           <div className="stat-card">
             <div className="stat-icon customer">📦</div>
             <div className="stat-info">
-              <div className="stat-value">0</div>
+              <div className="stat-value">{loading ? '...' : stats.completedOrders}</div>
               <div className="stat-label">Completed Orders</div>
             </div>
           </div>
         </div>
 
-        {/* Featured Products */}
+        {/* Quick Actions */}
         <section className="dashboard-section">
           <div className="section-header">
-            <h2>Featured Products</h2>
-            <button className="view-all-btn">View All →</button>
+            <h2>Quick Actions</h2>
           </div>
-          <div className="products-grid">
-            <div className="product-card">
-              <div className="product-badge">New</div>
-              <div className="product-image">📱</div>
-              <h3>Electronics Bundle</h3>
-              <p>Latest smartphones and accessories</p>
-              <div className="product-price">
-                <span className="original-price">₹50,000</span>
-                <span className="current-price">₹15,000</span>
-              </div>
-              <button className="product-btn">View Details</button>
+          <div className="quick-actions-grid">
+            <div 
+              className="action-card" 
+              onClick={() => navigate('/browse-products')} 
+              style={{cursor: 'pointer'}}
+            >
+              <div className="action-icon">🛍️</div>
+              <h3>Browse Products</h3>
+              <p>Discover amazing deals on seized goods</p>
             </div>
-            <div className="product-card">
-              <div className="product-badge">Hot Deal</div>
-              <div className="product-image">🏠</div>
-              <h3>Furniture Set</h3>
-              <p>Premium quality home furniture</p>
-              <div className="product-price">
-                <span className="original-price">₹1,00,000</span>
-                <span className="current-price">₹30,000</span>
-              </div>
-              <button className="product-btn">View Details</button>
+            <div 
+              className="action-card" 
+              onClick={() => navigate('/my-orders')} 
+              style={{cursor: 'pointer'}}
+            >
+              <div className="action-icon">📦</div>
+              <h3>Track Orders</h3>
+              <p>View and track your order status</p>
             </div>
-            <div className="product-card">
-              <div className="product-badge">Limited</div>
-              <div className="product-image">👕</div>
-              <h3>Clothing Collection</h3>
-              <p>Brand new fashion apparel</p>
-              <div className="product-price">
-                <span className="original-price">₹20,000</span>
-                <span className="current-price">₹6,000</span>
-              </div>
-              <button className="product-btn">View Details</button>
+            <div 
+              className="action-card" 
+              onClick={() => navigate('/wishlist')} 
+              style={{cursor: 'pointer'}}
+            >
+              <div className="action-icon">❤️</div>
+              <h3>My Wishlist</h3>
+              <p>View saved products and favorites</p>
             </div>
           </div>
         </section>
 
-        {/* Recent Activity */}
+        {/* Start Shopping Section */}
         <section className="dashboard-section">
           <div className="section-header">
-            <h2>Recent Activity</h2>
+            <h2>Start Shopping</h2>
+            <button 
+              className="view-all-btn" 
+              onClick={() => navigate('/browse-products')}
+            >
+              Browse All →
+            </button>
           </div>
           <div className="activity-list">
             <div className="activity-empty">
-              <div className="empty-icon">📭</div>
-              <h3>No recent activity</h3>
-              <p>Start browsing products to see your activity here</p>
-              <button className="cta-btn">Browse Products</button>
+              <div className="empty-icon">🛍️</div>
+              <h3>Ready to Shop?</h3>
+              <p>Explore our marketplace of seized government goods at amazing prices</p>
+              <button 
+                className="cta-btn" 
+                onClick={() => navigate('/browse-products')}
+              >
+                Browse Products
+              </button>
             </div>
           </div>
         </section>
