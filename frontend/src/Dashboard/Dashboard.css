@@ -530,94 +530,6 @@
   color: #64748b;
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .dashboard-sidebar {
-    width: 70px;
-  }
-
-  .dashboard-main {
-    margin-left: 70px;
-  }
-
-  .sidebar-header .logo-text,
-  .nav-item span:not(.nav-icon),
-  .logout-btn span:not(.nav-icon) {
-    display: none;
-  }
-
-  .nav-item,
-  .logout-btn {
-    justify-content: center;
-  }
-
-  .sidebar-header {
-    padding: 1.5rem 0.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .dashboard-sidebar {
-    transform: translateX(-100%);
-  }
-
-  .dashboard-main {
-    margin-left: 0;
-    padding: 1rem;
-  }
-
-  .dashboard-header {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
-  .header-content h1 {
-    font-size: 1.5rem;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-}
-<<<<<<< HEAD
-
-/* Additional CSS for sidebar button navigation */
-
-.sidebar-nav button.nav-item {
-  width: 100%;
-  text-align: left;
-  background: none;
-  font-family: inherit;
-  font-size: inherit;
-}
-
-.sidebar-nav button.nav-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.sidebar-nav button.nav-item.active {
-  background: rgba(255, 255, 255, 0.15);
-  border-left: 3px solid white;
-}
-
-/* Make action cards more interactive */
-.action-card {
-  transition: all 0.3s ease;
-}
-
-.action-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-/* Loading state for stats */
-.stat-value {
-  min-height: 3rem;
-  display: flex;
-  align-items: center;
-}
-=======
 /* Products List */
 .products-list {
   display: flex;
@@ -729,4 +641,54 @@
   color: #64748b;
   margin-bottom: 1.5rem;
 }
->>>>>>> 5137482c498d5c5f1ccbf431868ddf14606f9793
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dashboard-sidebar {
+    width: 70px;
+  }
+
+  .dashboard-main {
+    margin-left: 70px;
+  }
+
+  .sidebar-header .logo-text,
+  .nav-item span:not(.nav-icon),
+  .logout-btn span:not(.nav-icon) {
+    display: none;
+  }
+
+  .nav-item,
+  .logout-btn {
+    justify-content: center;
+  }
+
+  .sidebar-header {
+    padding: 1.5rem 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .dashboard-main {
+    margin-left: 0;
+    padding: 1rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .header-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
