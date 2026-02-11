@@ -120,41 +120,39 @@ const CustomerDashboard = () => {
           </div>
         </header>
 
-        {/* Stats Cards */}
+        {/* Stats Grid */}
         <div className="stats-grid">
           <div className="stat-card">
             <div className="stat-icon customer">🛍️</div>
             <div className="stat-info">
-              <div className="stat-value">{loading ? '...' : stats.activeOrders}</div>
+              <div className="stat-value">0</div>
               <div className="stat-label">Active Orders</div>
             </div>
           </div>
           <div className="stat-card">
             <div className="stat-icon customer">❤️</div>
             <div className="stat-info">
-              <div className="stat-value">{loading ? '...' : stats.wishlistItems}</div>
-              <div className="stat-label">Wishlist Items</div>
+              <div className="stat-value">0</div>
+              <div className="stat-label">Watchlist Items</div>
             </div>
           </div>
           <div className="stat-card">
             <div className="stat-icon customer">💰</div>
             <div className="stat-info">
-              <div className="stat-value">
-                {loading ? '...' : `₹${stats.totalSavings.toLocaleString()}`}
-              </div>
+              <div className="stat-value">₹0</div>
               <div className="stat-label">Total Savings</div>
             </div>
           </div>
           <div className="stat-card">
             <div className="stat-icon customer">📦</div>
             <div className="stat-info">
-              <div className="stat-value">{loading ? '...' : stats.completedOrders}</div>
+              <div className="stat-value">0</div>
               <div className="stat-label">Completed Orders</div>
             </div>
           </div>
         </div>
 
-        {/* Quick Actions */}
+        {/* Featured Products */}
         <section className="dashboard-section">
           <div className="section-header">
             <h2>Featured Products</h2>
