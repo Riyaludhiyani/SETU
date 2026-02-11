@@ -7,6 +7,13 @@ import CustomerDashboard from './Dashboard/CustomerDashboard';
 import AgencyDashboard from './Dashboard/AgencyDashboard';
 import AddProduct from './AddProduct/AddProduct';
 import MyProducts from './MyProducts/MyProducts';
+import Analytics from './Analytics/Analytics';
+import Messages from './Messages/Messages';
+import Settings from './Settings/Settings';
+import BrowseProducts from './BrowseProducts/BrowseProducts';
+import ProductDetail from './ProductDetail/ProductDetail';
+import Orders from './Orders/Orders';
+import Watchlist from './Watchlist/Watchlist';
 
 function App() {
   return (
@@ -32,6 +39,17 @@ function App() {
         {/* Agency Product Routes */}
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/my-products" element={<MyProducts />} />
+        <Route path="/analytics" element={<Analytics />} />
+
+        {/* Customer Routes */}
+        <Route path="/browse-products" element={<BrowseProducts />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/watchlist" element={<Watchlist />} />
+
+        {/* Shared Routes */}
+        <Route path="/messages" element={<Messages />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </Router>
   );
