@@ -5,6 +5,7 @@ import SignupForm from './AuthForm/SignupForm';
 import LoginForm from './AuthForm/LoginForm';
 import CustomerDashboard from './Dashboard/CustomerDashboard';
 import AgencyDashboard from './Dashboard/AgencyDashboard';
+import AdminDashboard from './Dashboard/AdminDashboard';
 import AddProduct from './AddProduct/AddProduct';
 import MyProducts from './MyProducts/MyProducts';
 import Analytics from './Analytics/Analytics';
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login/:userType" element={<LoginForm />} />
         <Route path="/dashboard/customer" element={<CustomerDashboard />} />
         <Route path="/dashboard/agency" element={<AgencyDashboard />} />
+        <Route path="/dashboard/admin" element={<AdminDashboard />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/my-products" element={<MyProducts />} />
         <Route path="/analytics" element={<Analytics />} />

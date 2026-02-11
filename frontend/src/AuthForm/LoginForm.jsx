@@ -52,10 +52,12 @@ const LoginForm = () => {
       localStorage.setItem('user', JSON.stringify(user));
 
       console.log('Login successful:', response.data);
-      
+
       // Redirect to appropriate dashboard
       if (userType === 'customer') {
         navigate('/dashboard/customer');
+      } else if (userType === 'admin') {
+        navigate('/dashboard/admin');
       } else {
         navigate('/dashboard/agency');
       }
@@ -77,10 +79,10 @@ const LoginForm = () => {
 
         <div className="form-card">
           <div className="form-header">
-            <div className="form-icon">
-              {userType === 'customer' ? '👤' : '🏢'}
+            <div className={`form-icon ${userType}`}>
+              {userType === 'customer' ? '👤' : userType === 'admin' ? '🛡️' : '🏢'}
             </div>
-            <h2>{userType === 'customer' ? 'Customer' : 'Agency'} Login</h2>
+            <h2>{userType === 'customer' ? 'Customer' : userType === 'admin' ? 'Admin' : 'Agency'} Login</h2>
             <p>Welcome back! Please login to continue</p>
           </div>
 
@@ -123,9 +125,9 @@ const LoginForm = () => {
               </button>
             </div>
 
-            <button 
-              type="submit" 
-              className={`submit-btn ${userType}`}
+            <button
+              type="submit"
+              className={`submit-btn ${userType === 'admin' ? 'admin' : userType}`}
               disabled={loading}
             >
               {loading ? 'Logging in...' : 'Login'}
@@ -133,15 +135,17 @@ const LoginForm = () => {
           </form>
 
           <div className="form-footer">
-            <p>
-              Don't have an account?{' '}
-              <button 
-                onClick={() => navigate(`/signup/${userType}`)} 
-                className="link-btn"
-              >
-                Sign up here
-              </button>
-            </p>
+            {userType !== 'admin' && (
+              <p>
+                Don't have an account?{' '}
+                <button
+                  onClick={() => navigate(`/signup/${userType}`)}
+                  className="link-btn"
+                >
+                  Sign up here
+                </button>
+              </p>
+            )}
           </div>
         </div>
       </div>

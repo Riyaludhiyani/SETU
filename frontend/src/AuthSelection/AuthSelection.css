@@ -113,6 +113,10 @@ body {
   background: linear-gradient(135deg, #7c3aed, #a78bfa);
 }
 
+.card-top.admin {
+  background: linear-gradient(135deg, #0f172a, #334155);
+}
+
 .card-top::before {
   content: '';
   position: absolute;
@@ -180,6 +184,16 @@ body {
 
 .agency-btn:hover {
   box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+  transform: translateY(-2px);
+}
+
+.admin-btn {
+  background: linear-gradient(135deg, #0f172a, #334155);
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.3);
+}
+
+.admin-btn:hover {
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.4);
   transform: translateY(-2px);
 }
 
