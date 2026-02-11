@@ -580,7 +580,6 @@
     grid-template-columns: 1fr;
   }
 }
-<<<<<<< HEAD
 
 /* Additional CSS for sidebar button navigation */
 
@@ -617,7 +616,6 @@
   display: flex;
   align-items: center;
 }
-=======
 /* Products List */
 .products-list {
   display: flex;
@@ -729,4 +727,3 @@
   color: #64748b;
   margin-bottom: 1.5rem;
 }
->>>>>>> 5137482c498d5c5f1ccbf431868ddf14606f9793
