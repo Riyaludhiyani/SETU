@@ -35,6 +35,10 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/watchlist" element={<Watchlist />} />
+
+        {/* Shared Routes */}
+        <Route path="/messages" element={<Messages />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </Router>
   );

@@ -88,6 +88,14 @@ const AgencyDashboard = () => {
             <span className="nav-icon">⚙️</span>
             <span>Settings</span>
           </a>
+          <a href="#" className="nav-item" onClick={() => navigate('/support')}>
+            <span className="nav-icon">❓</span>
+            <span>Support</span>
+          </a>
+          <a href="#" className="nav-item" onClick={() => navigate('/contact')}>
+            <span className="nav-icon">📞</span>
+            <span>Contact Us</span>
+          </a>
         </nav>
 
         <div className="sidebar-footer">
