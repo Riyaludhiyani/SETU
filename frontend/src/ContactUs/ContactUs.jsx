@@ -144,7 +144,7 @@ const ContactUs = () => {
             <span>Messages</span>
           </a>
           <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/support'); }}>
-            <span className="nav-icon">❓</span>
+            <span className="nav-icon">🆘</span>
             <span>Support</span>
           </a>
           <a href="#" className="nav-item active" onClick={(e) => { e.preventDefault(); navigate('/contact'); }}>

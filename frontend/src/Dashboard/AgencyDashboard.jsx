@@ -89,7 +89,7 @@ const AgencyDashboard = () => {
             <span>Settings</span>
           </a>
           <a href="#" className="nav-item" onClick={() => navigate('/support')}>
-            <span className="nav-icon">❓</span>
+            <span className="nav-icon">🆘</span>
             <span>Support</span>
           </a>
           <a href="#" className="nav-item" onClick={() => navigate('/contact')}>
