@@ -1,14 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-<<<<<<< HEAD
-import LandingPage from './LandingPage/LandingPage.jsx';
-import AuthSelection from './AuthSelection/AuthSelection.jsx';
-import SignupForm from './AuthForm/SignupForm.jsx';
-import LoginForm from './AuthForm/LoginForm.jsx';
-import CustomerDashboard from './Dashboard/CustomerDashboard.jsx';
-import AgencyDashboard from './Dashboard/AgencyDashboard.jsx';
-import AddProduct from './AddProduct/AddProduct.jsx';
-import MyProducts from './MyProducts/MyProducts.jsx';
-=======
 import LandingPage from './LandingPage/LandingPage';
 import AuthSelection from './AuthSelection/AuthSelection';
 import SignupForm from './AuthForm/SignupForm';
@@ -24,7 +14,8 @@ import BrowseProducts from './BrowseProducts/BrowseProducts';
 import ProductDetail from './ProductDetail/ProductDetail';
 import Orders from './Orders/Orders';
 import Watchlist from './Watchlist/Watchlist';
->>>>>>> 5137482c498d5c5f1ccbf431868ddf14606f9793
+import Support from './Support/Support';
+import ContactUs from './ContactUs/ContactUs';
 
 function App() {
   return (
@@ -61,6 +52,8 @@ function App() {
         {/* Shared Routes */}
         <Route path="/messages" element={<Messages />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/support" element={<Support />} />
+        <Route path="/contact" element={<ContactUs />} />
       </Routes>
     </Router>
   );
