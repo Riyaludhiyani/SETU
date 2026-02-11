@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../services/api';
 import './Dashboard.css';
 
 const CustomerDashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -22,7 +25,19 @@ const CustomerDashboard = () => {
     }
 
     setUser(parsedUser);
+    fetchFeaturedProducts();
   }, [navigate]);
+
+  const fetchFeaturedProducts = async () => {
+    try {
+      const response = await api.get('/api/products/all');
+      setFeaturedProducts(response.data.slice(0, 3));
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -44,27 +59,27 @@ const CustomerDashboard = () => {
         </div>
 
         <nav className="sidebar-nav">
-          <a href="#" className="nav-item active">
+          <a href="#" className="nav-item active" onClick={(e) => { e.preventDefault(); navigate('/dashboard/customer'); }}>
             <span className="nav-icon">🏠</span>
             <span>Dashboard</span>
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/browse-products'); }}>
             <span className="nav-icon">🛍️</span>
             <span>Browse Products</span>
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/orders'); }}>
             <span className="nav-icon">📋</span>
             <span>My Orders</span>
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/watchlist'); }}>
             <span className="nav-icon">❤️</span>
             <span>Watchlist</span>
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/messages'); }}>
             <span className="nav-icon">💬</span>
             <span>Messages</span>
           </a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/settings'); }}>
             <span className="nav-icon">⚙️</span>
             <span>Settings</span>
           </a>
@@ -136,43 +151,41 @@ const CustomerDashboard = () => {
         <section className="dashboard-section">
           <div className="section-header">
             <h2>Featured Products</h2>
-            <button className="view-all-btn">View All →</button>
+            <button className="view-all-btn" onClick={() => navigate('/browse-products')}>View All →</button>
           </div>
-          <div className="products-grid">
-            <div className="product-card">
-              <div className="product-badge">New</div>
-              <div className="product-image">📱</div>
-              <h3>Electronics Bundle</h3>
-              <p>Latest smartphones and accessories</p>
-              <div className="product-price">
-                <span className="original-price">₹50,000</span>
-                <span className="current-price">₹15,000</span>
-              </div>
-              <button className="product-btn">View Details</button>
+          {loading ? (
+            <div className="table-loading">Loading products...</div>
+          ) : featuredProducts.length > 0 ? (
+            <div className="products-grid">
+              {featuredProducts.map((product) => (
+                <div key={product._id} className="product-card">
+                  <div className="product-badge">
+                    {Math.round(((product.originalPrice - product.sellingPrice) / product.originalPrice) * 100)}% OFF
+                  </div>
+                  <div className="product-image">
+                    {product.images && product.images.length > 0 ? (
+                      <img src={product.images[0]} alt={product.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                      '📦'
+                    )}
+                  </div>
+                  <h3>{product.title}</h3>
+                  <p>{product.description.substring(0, 60)}...</p>
+                  <div className="product-price">
+                    <span className="original-price">₹{product.originalPrice.toLocaleString()}</span>
+                    <span className="current-price">₹{product.sellingPrice.toLocaleString()}</span>
+                  </div>
+                  <button className="product-btn" onClick={() => navigate(`/product/${product._id}`)}>View Details</button>
+                </div>
+              ))}
             </div>
-            <div className="product-card">
-              <div className="product-badge">Hot Deal</div>
-              <div className="product-image">🏠</div>
-              <h3>Furniture Set</h3>
-              <p>Premium quality home furniture</p>
-              <div className="product-price">
-                <span className="original-price">₹1,00,000</span>
-                <span className="current-price">₹30,000</span>
-              </div>
-              <button className="product-btn">View Details</button>
+          ) : (
+            <div className="empty-state">
+              <div className="empty-icon">📦</div>
+              <h3>No products available yet</h3>
+              <p>Check back soon for new listings</p>
             </div>
-            <div className="product-card">
-              <div className="product-badge">Limited</div>
-              <div className="product-image">👕</div>
-              <h3>Clothing Collection</h3>
-              <p>Brand new fashion apparel</p>
-              <div className="product-price">
-                <span className="original-price">₹20,000</span>
-                <span className="current-price">₹6,000</span>
-              </div>
-              <button className="product-btn">View Details</button>
-            </div>
-          </div>
+          )}
         </section>
 
         {/* Recent Activity */}
@@ -185,7 +198,7 @@ const CustomerDashboard = () => {
               <div className="empty-icon">📭</div>
               <h3>No recent activity</h3>
               <p>Start browsing products to see your activity here</p>
-              <button className="cta-btn">Browse Products</button>
+              <button className="cta-btn" onClick={() => navigate('/browse-products')}>Browse Products</button>
             </div>
           </div>
         </section>

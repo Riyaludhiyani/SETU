@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api';
 import './MyProducts.css';
 
 const MyProducts = () => {
@@ -21,12 +21,7 @@ const MyProducts = () => {
 
   const fetchProducts = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/products/my-products', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      const response = await api.get('/api/products/my-products');
       setProducts(response.data);
       setFilteredProducts(response.data);
       setLoading(false);
@@ -59,12 +54,7 @@ const MyProducts = () => {
     }
 
     try {
-      const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/products/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      await api.delete(`/api/products/${id}`);
       fetchProducts();
       alert('Product deleted successfully');
     } catch (error) {

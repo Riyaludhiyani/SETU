@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../services/api';
 import './Dashboard.css';
 
 const AgencyDashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [analytics, setAnalytics] = useState(null);
+  const [recentProducts, setRecentProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -22,7 +26,23 @@ const AgencyDashboard = () => {
     }
 
     setUser(parsedUser);
+    fetchDashboardData();
   }, [navigate]);
+
+  const fetchDashboardData = async () => {
+    try {
+      const [analyticsRes, productsRes] = await Promise.all([
+        api.get('/api/products/analytics'),
+        api.get('/api/products/my-products')
+      ]);
+      setAnalytics(analyticsRes.data);
+      setRecentProducts(productsRes.data.slice(0, 5));
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -105,28 +125,28 @@ const AgencyDashboard = () => {
           <div className="stat-card">
             <div className="stat-icon agency">📦</div>
             <div className="stat-info">
-              <div className="stat-value">0</div>
+              <div className="stat-value">{analytics?.overview.approvedProducts || 0}</div>
               <div className="stat-label">Active Listings</div>
             </div>
           </div>
           <div className="stat-card">
             <div className="stat-icon agency">💰</div>
             <div className="stat-info">
-              <div className="stat-value">₹0</div>
+              <div className="stat-value">₹{analytics?.overview.totalRevenue.toLocaleString() || 0}</div>
               <div className="stat-label">Total Revenue</div>
             </div>
           </div>
           <div className="stat-card">
-            <div className="stat-icon agency">👥</div>
+            <div className="stat-icon agency">⏳</div>
             <div className="stat-info">
-              <div className="stat-value">0</div>
-              <div className="stat-label">Active Customers</div>
+              <div className="stat-value">{analytics?.overview.pendingProducts || 0}</div>
+              <div className="stat-label">Pending Approval</div>
             </div>
           </div>
           <div className="stat-card">
             <div className="stat-icon agency">✅</div>
             <div className="stat-info">
-              <div className="stat-value">0</div>
+              <div className="stat-value">{analytics?.overview.soldProducts || 0}</div>
               <div className="stat-label">Completed Sales</div>
             </div>
           </div>
@@ -163,15 +183,35 @@ const AgencyDashboard = () => {
         <section className="dashboard-section">
           <div className="section-header">
             <h2>Recent Listings</h2>
-            <button className="view-all-btn">View All →</button>
+            <button className="view-all-btn" onClick={() => navigate('/my-products')}>View All →</button>
           </div>
           <div className="listings-table">
-            <div className="table-empty">
-              <div className="empty-icon">📦</div>
-              <h3>No listings yet</h3>
-              <p>Start by adding your first product to the marketplace</p>
-              <button className="cta-btn agency">Add First Product</button>
-            </div>
+            {loading ? (
+              <div className="table-loading">Loading...</div>
+            ) : recentProducts.length > 0 ? (
+              <div className="products-list">
+                {recentProducts.map((product) => (
+                  <div key={product._id} className="product-list-item">
+                    <div className="product-info">
+                      <h4>{product.title}</h4>
+                      <p className="product-category">{product.category}</p>
+                    </div>
+                    <div className="product-price">₹{product.sellingPrice.toLocaleString()}</div>
+                    <div className={`product-status ${product.status}`}>{product.status}</div>
+                    <div className="product-actions">
+                      <button onClick={() => navigate('/my-products')} className="view-btn">View</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="table-empty">
+                <div className="empty-icon">📦</div>
+                <h3>No listings yet</h3>
+                <p>Start by adding your first product to the marketplace</p>
+                <button className="cta-btn agency" onClick={() => navigate('/add-product')}>Add First Product</button>
+              </div>
+            )}
           </div>
         </section>
 
@@ -182,19 +222,19 @@ const AgencyDashboard = () => {
           </div>
           <div className="performance-grid">
             <div className="performance-card">
-              <h4>Sales This Month</h4>
-              <div className="performance-value">₹0</div>
-              <div className="performance-change positive">+0%</div>
+              <h4>Total Revenue</h4>
+              <div className="performance-value">₹{analytics?.overview.totalRevenue.toLocaleString() || 0}</div>
+              <div className="performance-change positive">{analytics?.overview.totalSales || 0} sales</div>
             </div>
             <div className="performance-card">
               <h4>Total Views</h4>
-              <div className="performance-value">0</div>
-              <div className="performance-change positive">+0%</div>
+              <div className="performance-value">{analytics?.overview.totalViews || 0}</div>
+              <div className="performance-change positive">All products</div>
             </div>
             <div className="performance-card">
               <h4>Conversion Rate</h4>
-              <div className="performance-value">0%</div>
-              <div className="performance-change neutral">0%</div>
+              <div className="performance-value">{analytics?.overview.conversionRate || 0}%</div>
+              <div className="performance-change neutral">Views to sales</div>
             </div>
           </div>
         </section>
