@@ -17,7 +17,7 @@ app.use("/api/customer", require("./routes/customerRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/setu")
+mongoose.connect(process.env.MONGO_URI || "mongodb+srv://ludhiyaniharsha_db_user:XqMHAji2fe020yMA@cluster0.jlditfa.mongodb.net/?appName=Cluster0")
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log("DB Error:", err));
 
