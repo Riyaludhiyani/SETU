@@ -1,6 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AuthSelection.css';
+import customerIcon from '../assets/customer-icon.svg';
+import agencyIcon from '../assets/agency-icon.svg';
+import adminIcon from '../assets/admin-icon.svg';
 
 const AuthSelection = ({ type }) => {
   const navigate = useNavigate();
@@ -22,7 +25,7 @@ const AuthSelection = ({ type }) => {
           {/* Customer Portal */}
           <div className="auth-portal-card">
             <div className="card-top customer">
-              <div className="card-icon">👤</div>
+              <div className="card-icon"><img src={customerIcon} alt="Customer" /></div>
             </div>
             <h3>Customer Portal</h3>
             <p>
@@ -41,7 +44,7 @@ const AuthSelection = ({ type }) => {
           {/* Agency Portal */}
           <div className="auth-portal-card">
             <div className="card-top agency">
-              <div className="card-icon">🏢</div>
+              <div className="card-icon"><img src={agencyIcon} alt="Agency" /></div>
             </div>
             <h3>Agency Portal</h3>
             <p>
@@ -61,7 +64,7 @@ const AuthSelection = ({ type }) => {
           {!isSignup && (
             <div className="auth-portal-card">
               <div className="card-top admin">
-                <div className="card-icon">🛡️</div>
+                <div className="card-icon"><img src={adminIcon} alt="Admin" /></div>
               </div>
               <h3>Admin Portal</h3>
               <p>
@@ -81,8 +84,8 @@ const AuthSelection = ({ type }) => {
           <h4>Need Help? 🤔</h4>
           <p>Not sure which portal to choose or having trouble logging in?</p>
           <div className="help-buttons">
-            <button className="help-btn secondary">💬 Get Support</button>
-            <button className="help-btn secondary">📧 Contact Us</button>
+            <button className="help-btn secondary" onClick={() => navigate('/help')}>💬 Get Support</button>
+            <button className="help-btn secondary" onClick={() => navigate('/contact')}>📧 Contact Us</button>
           </div>
         </div>
 

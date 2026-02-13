@@ -51,6 +51,14 @@
   animation: bounce 2s ease infinite;
 }
 
+.form-icon img {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
