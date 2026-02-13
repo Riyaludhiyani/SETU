@@ -236,6 +236,12 @@ const ProductDetail = () => {
                 {isCustomer && (
                   <div className="product-actions">
                     <button 
+                      className="buy-now-btn"
+                      onClick={() => navigate('/checkout', { state: { product } })}
+                    >
+                      🛒 Buy Now
+                    </button>
+                    <button 
                       className="contact-agency-btn"
                       onClick={() => setShowMessageForm(!showMessageForm)}
                     >

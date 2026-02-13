@@ -108,27 +108,55 @@ const Settings = () => {
   if (!user) return null;
 
   const isAgency = user.role === 'agency';
+  const isAdmin = user.role === 'admin';
 
   return (
     <div className="dashboard-container">
-      <aside className={`dashboard-sidebar ${isAgency ? 'agency-sidebar' : ''}`}>
+      <aside className={`dashboard-sidebar ${isAgency ? 'agency-sidebar' : ''} ${isAdmin ? 'admin-sidebar' : ''}`}>
         <div className="sidebar-header">
           <div className="logo">
             <span className="logo-icon">🔓</span>
-            <span className="logo-text">Setu</span>
+            <span className="logo-text">{isAdmin ? 'Setu Admin' : 'Setu'}</span>
           </div>
         </div>
 
         <nav className="sidebar-nav">
           <a href="#" className="nav-item" onClick={(e) => { 
             e.preventDefault(); 
-            navigate(isAgency ? '/dashboard/agency' : '/dashboard/customer'); 
+            navigate(isAdmin ? '/dashboard/admin' : (isAgency ? '/dashboard/agency' : '/dashboard/customer')); 
           }}>
             <span className="nav-icon">🏠</span>
             <span>Dashboard</span>
           </a>
-          {isAgency ? (
+          {isAdmin ? (
             <>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/document-approval'); }}>
+                <span className="nav-icon">📄</span>
+                <span>Document Approval</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/admin/pending-products'); }}>
+                <span className="nav-icon">⏳</span>
+                <span>Pending Approvals</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/admin/all-products'); }}>
+                <span className="nav-icon">📦</span>
+                <span>All Products</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/admin/users'); }}>
+                <span className="nav-icon">👥</span>
+                <span>Users</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/messages'); }}>
+                <span className="nav-icon">💬</span>
+                <span>Messages</span>
+              </a>
+            </>
+          ) : isAgency ? (
+            <>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/upload-documents'); }}>
+                <span className="nav-icon">📄</span>
+                <span>Documents</span>
+              </a>
               <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/my-products'); }}>
                 <span className="nav-icon">📦</span>
                 <span>My Products</span>
@@ -136,6 +164,10 @@ const Settings = () => {
               <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/add-product'); }}>
                 <span className="nav-icon">➕</span>
                 <span>Add Product</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/agency-orders'); }}>
+                <span className="nav-icon">📋</span>
+                <span>Orders</span>
               </a>
               <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/analytics'); }}>
                 <span className="nav-icon">📊</span>
@@ -158,18 +190,22 @@ const Settings = () => {
               </a>
             </>
           )}
-          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/messages'); }}>
-            <span className="nav-icon">💬</span>
-            <span>Messages</span>
-          </a>
-          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/support'); }}>
-            <span className="nav-icon">❓</span>
-            <span>Support</span>
-          </a>
-          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/contact'); }}>
-            <span className="nav-icon">📞</span>
-            <span>Contact Us</span>
-          </a>
+          {!isAdmin && (
+            <>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/messages'); }}>
+                <span className="nav-icon">💬</span>
+                <span>Messages</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/support'); }}>
+                <span className="nav-icon">❓</span>
+                <span>Support</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/contact'); }}>
+                <span className="nav-icon">📞</span>
+                <span>Contact Us</span>
+              </a>
+            </>
+          )}
           <a href="#" className="nav-item active" onClick={(e) => { e.preventDefault(); navigate('/settings'); }}>
             <span className="nav-icon">⚙️</span>
             <span>Settings</span>
@@ -195,12 +231,12 @@ const Settings = () => {
               <span>🔔</span>
             </button>
             <div className="user-profile">
-              <div className={`profile-avatar ${isAgency ? 'agency' : ''}`}>
+              <div className={`profile-avatar ${isAdmin ? 'admin' : (isAgency ? 'agency' : '')}`}>
                 {user.name.charAt(0).toUpperCase()}
               </div>
               <div className="profile-info">
                 <div className="profile-name">{user.name}</div>
-                <div className="profile-role">{isAgency ? 'Agency' : 'Customer'}</div>
+                <div className="profile-role">{isAdmin ? 'Admin' : (isAgency ? 'Agency' : 'Customer')}</div>
               </div>
             </div>
           </div>
@@ -245,7 +281,7 @@ const Settings = () => {
                 disabled
               />
             </div>
-            <button type="submit" className={`submit-btn ${isAgency ? 'agency' : 'customer'}`}>
+            <button type="submit" className={`submit-btn ${isAdmin ? 'admin' : (isAgency ? 'agency' : 'customer')}`}>
               Update Profile
             </button>
           </form>
@@ -286,7 +322,7 @@ const Settings = () => {
                 required
               />
             </div>
-            <button type="submit" className={`submit-btn ${isAgency ? 'agency' : 'customer'}`}>
+            <button type="submit" className={`submit-btn ${isAdmin ? 'admin' : (isAgency ? 'agency' : 'customer')}`}>
               Change Password
             </button>
           </form>

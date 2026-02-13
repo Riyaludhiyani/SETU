@@ -53,6 +53,29 @@ exports.getAgencyMessages = async (req, res) => {
     }
 };
 
+// Get all messages for customer
+exports.getCustomerMessages = async (req, res) => {
+    try {
+        const customerId = req.user.id;
+        const { status } = req.query;
+
+        const filter = { customer: customerId };
+        if (status) {
+            filter.status = status;
+        }
+
+        const messages = await Message.find(filter)
+            .populate('product', 'title')
+            .populate('agency', 'name email')
+            .sort({ createdAt: -1 });
+
+        res.json(messages);
+    } catch (error) {
+        console.error("Get customer messages error:", error);
+        res.status(500).json({ message: "Failed to fetch messages", error: error.message });
+    }
+};
+
 // Mark message as read
 exports.markAsRead = async (req, res) => {
     try {

@@ -51,179 +51,106 @@
   margin-left: 0.5rem;
 }
 
-.metrics-grid {
+/* Product Stats Grid */
+.product-stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
-.metric-card {
+.product-stat-item {
   background: white;
   padding: 1.5rem;
   border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid #e2e8f0;
+  text-align: center;
+  transition: all 0.2s;
 }
 
-.metric-card:hover {
+.product-stat-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.metric-card h4 {
-  font-size: 0.875rem;
-  color: #64748b;
-  margin: 0 0 0.75rem 0;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.product-stat-item.pending {
+  border-color: #fbbf24;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
 }
 
-.metric-value {
-  font-size: 2rem;
+.product-stat-item.approved {
+  border-color: #34d399;
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+}
+
+.product-stat-item.rejected {
+  border-color: #f87171;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+}
+
+.product-stat-item.sold {
+  border-color: #60a5fa;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+}
+
+.product-stat-item .stat-number {
+  font-size: 2.5rem;
   font-weight: 700;
   color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.product-stat-item .stat-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* Revenue Overview */
+.revenue-overview {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  color: white;
+}
+
+.revenue-main {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.revenue-amount {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.revenue-label {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.revenue-details {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.revenue-detail-item {
+  text-align: center;
+}
+
+.detail-label {
+  display: block;
+  font-size: 0.875rem;
+  opacity: 0.8;
   margin-bottom: 0.25rem;
 }
 
-.metric-description {
-  font-size: 0.75rem;
-  color: #94a3b8;
-}
-
-/* Status Breakdown */
-.status-breakdown {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.status-item {
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  position: relative;
-  overflow: hidden;
-}
-
-.status-bar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  background: rgba(102, 126, 234, 0.1);
-  transition: width 0.3s ease;
-}
-
-.status-item.approved .status-bar {
-  background: rgba(34, 197, 94, 0.1);
-}
-
-.status-item.pending .status-bar {
-  background: rgba(251, 191, 36, 0.1);
-}
-
-.status-item.sold .status-bar {
-  background: rgba(59, 130, 246, 0.1);
-}
-
-.status-info {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.status-label {
-  font-weight: 600;
-  color: #1e293b;
-  font-size: 0.9rem;
-}
-
-.status-count {
+.detail-value {
+  display: block;
+  font-size: 1.5rem;
   font-weight: 700;
-  font-size: 1.25rem;
-  color: #1e293b;
-}
-
-/* Top Products */
-.top-products-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.top-product-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-  transition: all 0.2s;
-}
-
-.top-product-item:hover {
-  transform: translateX(4px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.product-rank {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.875rem;
-  flex-shrink: 0;
-}
-
-.product-thumb {
-  width: 50px;
-  height: 50px;
-  border-radius: 6px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.product-details {
-  flex: 1;
-  min-width: 0;
-}
-
-.product-title {
-  font-weight: 600;
-  color: #1e293b;
-  font-size: 0.9rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.product-category {
-  font-size: 0.75rem;
-  color: #94a3b8;
-  text-transform: capitalize;
-}
-
-.product-stats {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.stat-badge {
-  padding: 0.25rem 0.75rem;
-  background: #f1f5f9;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #475569;
 }
 
 /* Category Chart */
@@ -281,8 +208,70 @@
   color: #94a3b8;
 }
 
-/* Sales Chart */
-.sales-chart {
+/* Top Agencies List */
+.top-agencies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.agency-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s;
+}
+
+.agency-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.agency-rank {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.agency-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.agency-name {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.agency-email {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.agency-count {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 0.9rem;
+}
+
+/* Monthly Chart */
+.monthly-chart {
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
@@ -326,14 +315,18 @@
   padding-top: 0.5rem;
 }
 
+.chart-bar.admin {
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+}
+
 .chart-bar:hover {
   opacity: 0.8;
   transform: translateY(-4px);
 }
 
 .bar-value {
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 700;
   color: white;
   white-space: nowrap;
 }
@@ -349,22 +342,22 @@
   color: #1e293b;
 }
 
-.chart-count {
+.chart-year {
   font-size: 0.7rem;
   color: #94a3b8;
 }
 
-/* Recent Orders */
-.recent-orders-list {
+/* Activity List */
+.activity-list {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.order-item {
+.activity-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   padding: 1rem;
   background: white;
   border-radius: 8px;
@@ -372,40 +365,39 @@
   transition: all 0.2s;
 }
 
-.order-item:hover {
+.activity-item:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.order-info {
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  background: #f1f5f9;
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
 }
 
-.order-number {
+.activity-details {
+  flex: 1;
+}
+
+.activity-title {
   font-weight: 600;
   color: #1e293b;
   font-size: 0.9rem;
+  margin-bottom: 0.25rem;
 }
 
-.order-customer {
-  font-size: 0.8rem;
-  color: #64748b;
+.activity-time {
+  font-size: 0.75rem;
+  color: #94a3b8;
 }
 
-.order-details {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.order-amount {
-  font-weight: 700;
-  color: #1e293b;
-  font-size: 1rem;
-}
-
-.order-status {
+.activity-badge {
   padding: 0.375rem 0.75rem;
   border-radius: 12px;
   font-size: 0.75rem;
@@ -413,34 +405,19 @@
   text-transform: capitalize;
 }
 
-.order-status.pending {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.order-status.confirmed {
+.activity-badge.product {
   background: #dbeafe;
   color: #1e40af;
 }
 
-.order-status.processing {
+.activity-badge.user {
   background: #e0e7ff;
   color: #3730a3;
 }
 
-.order-status.shipped {
-  background: #e0f2fe;
-  color: #075985;
-}
-
-.order-status.delivered {
+.activity-badge.order {
   background: #d1fae5;
   color: #065f46;
-}
-
-.order-status.cancelled {
-  background: #fee2e2;
-  color: #991b1b;
 }
 
 /* Empty States */
@@ -459,43 +436,30 @@
   font-size: 0.875rem;
 }
 
-.sale-count {
-  font-size: 0.875rem;
-  color: #64748b;
-}
-
-.sale-revenue {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #7c3aed;
-}
-
+/* Loading Container */
 .loading-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 4rem;
-  text-align: center;
 }
 
 .loading-spinner {
   width: 50px;
   height: 50px;
   border: 4px solid #e2e8f0;
-  border-top-color: #7c3aed;
+  border-top-color: #667eea;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 1rem;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
-@media (max-width: 968px) {
-  .analytics-row {
-    grid-template-columns: 1fr;
-  }
+.loading-container p {
+  color: #64748b;
+  font-size: 0.875rem;
 }

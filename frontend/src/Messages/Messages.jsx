@@ -17,13 +17,13 @@ const Messages = () => {
     const userData = localStorage.getItem('user');
 
     if (!token || !userData) {
-      navigate('/login/agency');
+      navigate('/login');
       return;
     }
 
     const parsedUser = JSON.parse(userData);
-    if (parsedUser.role !== 'agency') {
-      navigate('/login/agency');
+    if (parsedUser.role !== 'agency' && parsedUser.role !== 'customer') {
+      navigate('/login');
       return;
     }
 
@@ -34,7 +34,8 @@ const Messages = () => {
   const fetchMessages = async () => {
     try {
       const params = filter !== 'all' ? { status: filter } : {};
-      const response = await api.get('/api/messages', { params });
+      const endpoint = user?.role === 'customer' ? '/api/messages/customer' : '/api/messages/agency';
+      const response = await api.get(endpoint, { params });
       setMessages(response.data);
     } catch (error) {
       console.error('Error fetching messages:', error);
@@ -100,7 +101,7 @@ const Messages = () => {
 
   return (
     <div className="dashboard-container">
-      <aside className="dashboard-sidebar agency-sidebar">
+      <aside className={`dashboard-sidebar ${user.role === 'agency' ? 'agency-sidebar' : ''}`}>
         <div className="sidebar-header">
           <div className="logo">
             <span className="logo-icon">🔓</span>
@@ -109,22 +110,49 @@ const Messages = () => {
         </div>
 
         <nav className="sidebar-nav">
-          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/dashboard/agency'); }}>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate(user.role === 'agency' ? '/dashboard/agency' : '/dashboard/customer'); }}>
             <span className="nav-icon">🏠</span>
             <span>Dashboard</span>
           </a>
-          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/my-products'); }}>
-            <span className="nav-icon">📦</span>
-            <span>My Products</span>
-          </a>
-          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/add-product'); }}>
-            <span className="nav-icon">➕</span>
-            <span>Add Product</span>
-          </a>
-          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/analytics'); }}>
-            <span className="nav-icon">📊</span>
-            <span>Analytics</span>
-          </a>
+          {user.role === 'agency' ? (
+            <>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/upload-documents'); }}>
+                <span className="nav-icon">📄</span>
+                <span>Documents</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/my-products'); }}>
+                <span className="nav-icon">📦</span>
+                <span>My Products</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/add-product'); }}>
+                <span className="nav-icon">➕</span>
+                <span>Add Product</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/agency-orders'); }}>
+                <span className="nav-icon">📋</span>
+                <span>Orders</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/analytics'); }}>
+                <span className="nav-icon">📊</span>
+                <span>Analytics</span>
+              </a>
+            </>
+          ) : (
+            <>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/browse-products'); }}>
+                <span className="nav-icon">🛍️</span>
+                <span>Browse Products</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/orders'); }}>
+                <span className="nav-icon">📋</span>
+                <span>My Orders</span>
+              </a>
+              <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/watchlist'); }}>
+                <span className="nav-icon">❤️</span>
+                <span>Watchlist</span>
+              </a>
+            </>
+          )}
           <a href="#" className="nav-item active" onClick={(e) => { e.preventDefault(); navigate('/messages'); }}>
             <span className="nav-icon">💬</span>
             <span>Messages</span>
@@ -147,17 +175,17 @@ const Messages = () => {
         <header className="dashboard-header">
           <div className="header-content">
             <h1>Messages</h1>
-            <p>Customer inquiries and communications</p>
+            <p>{user.role === 'agency' ? 'Customer inquiries and communications' : 'Your messages and agency replies'}</p>
           </div>
           <div className="header-actions">
             <button className="header-btn">
               <span>🔔</span>
             </button>
             <div className="user-profile">
-              <div className="profile-avatar agency">{user.name.charAt(0).toUpperCase()}</div>
+              <div className={`profile-avatar ${user.role === 'agency' ? 'agency' : ''}`}>{user.name.charAt(0).toUpperCase()}</div>
               <div className="profile-info">
                 <div className="profile-name">{user.name}</div>
-                <div className="profile-role">Agency</div>
+                <div className="profile-role">{user.role === 'agency' ? 'Agency' : 'Customer'}</div>
               </div>
             </div>
           </div>
@@ -204,8 +232,17 @@ const Messages = () => {
                     <div className="message-meta">
                       <h3>{message.subject}</h3>
                       <div className="message-info">
-                        <span className="customer-name">From: {message.customerName}</span>
-                        <span className="customer-email">({message.customerEmail})</span>
+                        {user.role === 'agency' ? (
+                          <>
+                            <span className="customer-name">From: {message.customerName}</span>
+                            <span className="customer-email">({message.customerEmail})</span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="customer-name">To: {message.agency?.name || 'Agency'}</span>
+                            <span className="customer-email">({message.agency?.email || ''})</span>
+                          </>
+                        )}
                         {message.product && (
                           <span className="product-title">Re: {message.product.title}</span>
                         )}
@@ -225,7 +262,7 @@ const Messages = () => {
 
                   {message.reply && (
                     <div className="message-reply">
-                      <strong>Your Reply:</strong>
+                      <strong>{user.role === 'agency' ? 'Your Reply:' : 'Agency Reply:'}</strong>
                       <p>{message.reply}</p>
                       <div className="reply-date">
                         Replied on: {new Date(message.repliedAt).toLocaleString()}
@@ -233,30 +270,32 @@ const Messages = () => {
                     </div>
                   )}
 
-                  <div className="message-actions">
-                    {message.status === 'unread' && (
+                  {user.role === 'agency' && (
+                    <div className="message-actions">
+                      {message.status === 'unread' && (
+                        <button 
+                          className="action-btn read-btn"
+                          onClick={() => handleMarkAsRead(message._id)}
+                        >
+                          Mark as Read
+                        </button>
+                      )}
                       <button 
-                        className="action-btn read-btn"
-                        onClick={() => handleMarkAsRead(message._id)}
+                        className="action-btn reply-btn"
+                        onClick={() => setSelectedMessage(selectedMessage === message._id ? null : message._id)}
                       >
-                        Mark as Read
+                        {selectedMessage === message._id ? 'Cancel Reply' : 'Reply'}
                       </button>
-                    )}
-                    <button 
-                      className="action-btn reply-btn"
-                      onClick={() => setSelectedMessage(selectedMessage === message._id ? null : message._id)}
-                    >
-                      {selectedMessage === message._id ? 'Cancel Reply' : 'Reply'}
-                    </button>
-                    <button 
-                      className="action-btn delete-btn"
-                      onClick={() => handleDelete(message._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
+                      <button 
+                        className="action-btn delete-btn"
+                        onClick={() => handleDelete(message._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
 
-                  {selectedMessage === message._id && (
+                  {selectedMessage === message._id && user.role === 'agency' && (
                     <div className="reply-form">
                       <textarea
                         value={replyText[message._id] || ''}
@@ -279,7 +318,7 @@ const Messages = () => {
             <div className="empty-state">
               <div className="empty-icon">💬</div>
               <h3>No messages yet</h3>
-              <p>Customer messages will appear here</p>
+              <p>{user.role === 'agency' ? 'Customer messages will appear here' : 'Your sent messages will appear here'}</p>
             </div>
           )}
         </section>

@@ -80,6 +80,10 @@ const AgencyDashboard = () => {
             <span className="nav-icon">➕</span>
             <span>Add Product</span>
           </a>
+          <a href="#" className="nav-item" onClick={() => navigate('/agency-orders')}>
+            <span className="nav-icon">📋</span>
+            <span>Orders</span>
+          </a>
           <a href="#" className="nav-item" onClick={() => navigate('/analytics')}>
             <span className="nav-icon">📊</span>
             <span>Analytics</span>

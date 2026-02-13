@@ -136,6 +136,7 @@ exports.getAnalytics = async (req, res) => {
         const sales = await Sale.find({ agency: agencyId });
         const totalRevenue = sales.reduce((sum, sale) => sum + sale.amount, 0);
         const totalSales = sales.length;
+        const avgOrderValue = totalSales > 0 ? (totalRevenue / totalSales).toFixed(0) : 0;
 
         // Get views
         const products = await Product.find({ agency: agencyId });
@@ -189,6 +190,7 @@ exports.getAnalytics = async (req, res) => {
                 totalRevenue,
                 totalSales,
                 totalViews,
+                avgOrderValue,
                 conversionRate: totalViews > 0 ? ((totalSales / totalViews) * 100).toFixed(2) : 0
             },
             monthlySales,
@@ -197,6 +199,23 @@ exports.getAnalytics = async (req, res) => {
     } catch (error) {
         console.error("Get analytics error:", error);
         res.status(500).json({ message: "Failed to fetch analytics", error: error.message });
+    }
+};
+
+// Get top products by views for agency
+exports.getTopProducts = async (req, res) => {
+    try {
+        const agencyId = req.user.id;
+        
+        const topProducts = await Product.find({ agency: agencyId })
+            .sort({ views: -1 })
+            .limit(10)
+            .select('title category images views sellingPrice status');
+        
+        res.json(topProducts);
+    } catch (error) {
+        console.error("Get top products error:", error);
+        res.status(500).json({ message: "Failed to fetch top products", error: error.message });
     }
 };
 

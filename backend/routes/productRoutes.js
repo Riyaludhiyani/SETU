@@ -6,6 +6,7 @@ const {
     updateProduct,
     deleteProduct,
     getAnalytics,
+    getTopProducts,
     getAllProducts
 } = require("../controllers/productController.js");
 const authMiddleware = require("../middleware/authMiddleware.js");
@@ -17,6 +18,7 @@ router.get("/all", getAllProducts); // For customers to browse
 router.post("/", authMiddleware(['agency']), addProduct);
 router.get("/my-products", authMiddleware(['agency']), getAgencyProducts);
 router.get("/analytics", authMiddleware(['agency']), getAnalytics);
+router.get("/top-products", authMiddleware(['agency']), getTopProducts);
 router.get("/:id", authMiddleware(), getProduct);
 router.put("/:id", authMiddleware(['agency']), updateProduct);
 router.delete("/:id", authMiddleware(['agency']), deleteProduct);

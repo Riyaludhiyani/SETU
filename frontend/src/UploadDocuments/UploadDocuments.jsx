@@ -141,6 +141,10 @@ const UploadDocuments = () => {
             <span className="nav-icon">➕</span>
             <span>Add Product</span>
           </a>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/agency-orders'); }}>
+            <span className="nav-icon">📋</span>
+            <span>Orders</span>
+          </a>
           <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/analytics'); }}>
             <span className="nav-icon">📊</span>
             <span>Analytics</span>
