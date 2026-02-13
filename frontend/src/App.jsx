@@ -15,6 +15,15 @@ import BrowseProducts from './BrowseProducts/BrowseProducts';
 import ProductDetail from './ProductDetail/ProductDetail';
 import Orders from './Orders/Orders';
 import Watchlist from './Watchlist/Watchlist';
+import Features from './StaticPages/Features';
+import HowItWorks from './StaticPages/HowItWorks';
+import About from './StaticPages/About';
+import PrivacyPolicy from './StaticPages/PrivacyPolicy';
+import TermsOfService from './StaticPages/TermsOfService';
+import Compliance from './StaticPages/Compliance';
+import HelpCenter from './StaticPages/HelpCenter';
+import ContactUs from './StaticPages/ContactUs';
+import FAQ from './StaticPages/FAQ';
 
 function App() {
   return (
@@ -37,6 +46,15 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/watchlist" element={<Watchlist />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/compliance" element={<Compliance />} />
+        <Route path="/help" element={<HelpCenter />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/faq" element={<FAQ />} />
 
         {/* Shared Routes */}
         <Route path="/messages" element={<Messages />} />
