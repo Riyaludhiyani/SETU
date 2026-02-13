@@ -68,6 +68,10 @@ const AgencyDashboard = () => {
             <span className="nav-icon">🏠</span>
             <span>Dashboard</span>
           </a>
+          <a href="#" className="nav-item" onClick={() => navigate('/upload-documents')}>
+            <span className="nav-icon">📄</span>
+            <span>Documents</span>
+          </a>
           <a href="#" className="nav-item" onClick={() => navigate('/my-products')}>
             <span className="nav-icon">📦</span>
             <span>My Products</span>

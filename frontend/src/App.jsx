@@ -15,6 +15,8 @@ import BrowseProducts from './BrowseProducts/BrowseProducts';
 import ProductDetail from './ProductDetail/ProductDetail';
 import Orders from './Orders/Orders';
 import Watchlist from './Watchlist/Watchlist';
+import Support from './Support/Support';
+import UploadDocuments from './UploadDocuments/UploadDocuments';
 import Features from './StaticPages/Features';
 import HowItWorks from './StaticPages/HowItWorks';
 import About from './StaticPages/About';
@@ -39,6 +41,7 @@ function App() {
         <Route path="/dashboard/admin" element={<AdminDashboard />} />
         <Route path="/add-product" element={<AddProduct />} />
         <Route path="/my-products" element={<MyProducts />} />
+        <Route path="/upload-documents" element={<UploadDocuments />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/settings" element={<Settings />} />
@@ -46,6 +49,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/watchlist" element={<Watchlist />} />
+        <Route path="/support" element={<Support />} />
         <Route path="/features" element={<Features />} />
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/about" element={<About />} />

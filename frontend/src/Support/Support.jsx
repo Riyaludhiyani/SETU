@@ -31,6 +31,15 @@ const Support = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    // Auto-switch to "All Topics" when user starts searching
+    if (value.trim() !== '' && activeCategory !== 'all') {
+      setActiveCategory('all');
+    }
+  };
+
   const faqData = [
     {
       category: 'account',
@@ -221,10 +230,24 @@ const Support = () => {
               type="text"
               placeholder="Search for help..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={handleSearchChange}
               className="support-search-input"
             />
+            {searchQuery && (
+              <button 
+                className="clear-search-btn" 
+                onClick={() => setSearchQuery('')}
+                aria-label="Clear search"
+              >
+                ✕
+              </button>
+            )}
           </div>
+          {searchQuery && (
+            <div className="search-active-notice">
+              Searching for "{searchQuery}" in all categories
+            </div>
+          )}
         </div>
 
         <section className="dashboard-section">
@@ -275,7 +298,19 @@ const Support = () => {
               <div className="empty-state">
                 <div className="empty-icon">🔍</div>
                 <h3>No results found</h3>
-                <p>Try adjusting your search or category filter</p>
+                <p>
+                  {searchQuery 
+                    ? `No FAQs match "${searchQuery}". Try different keywords or browse by category.`
+                    : 'Try adjusting your category filter or use the search bar above.'}
+                </p>
+                {searchQuery && (
+                  <button 
+                    className="clear-search-link"
+                    onClick={() => setSearchQuery('')}
+                  >
+                    Clear search
+                  </button>
+                )}
               </div>
             )}
           </div>
