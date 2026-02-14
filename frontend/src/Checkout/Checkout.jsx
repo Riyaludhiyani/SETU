@@ -311,7 +311,7 @@ const Checkout = () => {
             
             <div className="summary-product">
               <div className="summary-product-image">
-                {product.images && product.images.length > 0 ? (
+                {product.images && product.images.length > 0 && product.images[0].startsWith('http') ? (
                   <img src={product.images[0]} alt={product.title} />
                 ) : (
                   <div className="no-image">📦</div>

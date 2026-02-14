@@ -34,7 +34,8 @@ const PendingProducts = () => {
   const fetchPendingProducts = async () => {
     try {
       const response = await api.get('/api/admin/pending-products');
-      setProducts(response.data);
+      const productList = response.data.products || [];
+      setProducts(productList);
     } catch (error) {
       console.error('Error fetching pending products:', error);
     } finally {
@@ -173,7 +174,7 @@ const PendingProducts = () => {
               {products.map((product) => (
                 <div key={product._id} className="product-approval-card">
                   <div className="product-image-section">
-                    {product.images && product.images.length > 0 && (
+                    {product.images && product.images.length > 0 && product.images[0].startsWith('http') && (
                       <img src={product.images[0]} alt={product.title} />
                     )}
                   </div>

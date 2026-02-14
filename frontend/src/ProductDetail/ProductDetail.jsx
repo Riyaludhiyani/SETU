@@ -183,7 +183,7 @@ const ProductDetail = () => {
           <div className="product-detail-container">
             <div className="product-detail-grid">
               <div className="product-images-section">
-                {product.images && product.images.length > 0 ? (
+                {product.images && product.images.length > 0 && product.images[0].startsWith('http') ? (
                   <div className="main-image-container">
                     <img src={product.images[0]} alt={product.title} className="main-image" />
                     <div className="savings-badge-large">

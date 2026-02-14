@@ -34,8 +34,9 @@ const AllProducts = () => {
   const fetchProducts = async () => {
     try {
       const response = await api.get('/api/admin/all-products');
-      setProducts(response.data);
-      calculateStats(response.data);
+      const productList = response.data.products || [];
+      setProducts(productList);
+      calculateStats(productList);
     } catch (error) {
       console.error('Error fetching products:', error);
     } finally {
@@ -267,7 +268,7 @@ const AllProducts = () => {
                     <tr key={product._id}>
                       <td>
                         <div className="product-cell">
-                          {product.images && product.images[0] && (
+                          {product.images && product.images[0] && product.images[0].startsWith('http') && (
                             <img src={product.images[0]} alt={product.title} className="product-thumbnail" />
                           )}
                           <span>{product.title}</span>

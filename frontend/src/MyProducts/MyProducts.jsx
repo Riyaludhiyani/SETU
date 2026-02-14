@@ -191,7 +191,7 @@ const MyProducts = () => {
             {filteredProducts.map(product => (
               <div key={product._id} className="product-item">
                 <div className="product-image-section">
-                  {product.images && product.images.length > 0 ? (
+                  {product.images && product.images.length > 0 && product.images[0].startsWith('http') ? (
                     <img src={product.images[0]} alt={product.title} />
                   ) : (
                     <div className="placeholder-image">

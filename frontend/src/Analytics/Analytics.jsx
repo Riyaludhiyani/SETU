@@ -295,7 +295,9 @@ const Analytics = () => {
                     topProducts.slice(0, 5).map((product, index) => (
                       <div key={product._id} className="top-product-item">
                         <div className="product-rank">#{index + 1}</div>
-                        <img src={product.images[0]} alt={product.title} className="product-thumb" />
+                        {product.images && product.images[0] && product.images[0].startsWith('http') && (
+                          <img src={product.images[0]} alt={product.title} className="product-thumb" />
+                        )}
                         <div className="product-details">
                           <div className="product-title">{product.title}</div>
                           <div className="product-category">{product.category}</div>

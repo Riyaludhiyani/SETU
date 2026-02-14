@@ -264,7 +264,7 @@ const AdminDashboard = () => {
                 {pendingProducts.map((product) => (
                   <div key={product._id} className="product-list-item admin-list-item">
                     <div className="product-image-thumb">
-                      {product.images && product.images.length > 0 ? (
+                      {product.images && product.images.length > 0 && product.images[0].startsWith('http') ? (
                         <img src={product.images[0]} alt={product.title} />
                       ) : (
                         <div className="no-image">📷</div>
