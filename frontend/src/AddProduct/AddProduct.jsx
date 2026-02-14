@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import './AddProduct.css';
@@ -8,6 +8,8 @@ const AddProduct = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isVerified, setIsVerified] = useState(null);
+  const [checkingVerification, setCheckingVerification] = useState(true);
   
   const [formData, setFormData] = useState({
     title: '',
@@ -22,6 +24,22 @@ const AddProduct = () => {
 
   const categories = ['Electronics', 'Furniture', 'Clothing', 'Appliances', 'Toys', 'Vehicles', 'Others'];
   const conditions = ['New', 'Like New', 'Good', 'Fair'];
+
+  useEffect(() => {
+    checkVerificationStatus();
+  }, []);
+
+  const checkVerificationStatus = async () => {
+    try {
+      const response = await api.get('/api/documents/check-verification');
+      setIsVerified(response.data.isVerified);
+    } catch (error) {
+      console.error('Error checking verification:', error);
+      setIsVerified(false);
+    } finally {
+      setCheckingVerification(false);
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -74,6 +92,16 @@ const AddProduct = () => {
     }
   };
 
+  if (checkingVerification) {
+    return (
+      <div className="add-product-page">
+        <div className="add-product-container">
+          <div className="loading-state">Checking verification status...</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="add-product-page">
       <div className="add-product-container">
@@ -81,7 +109,23 @@ const AddProduct = () => {
           ← Back to Dashboard
         </button>
 
-        <div className="add-product-card">
+        {isVerified === false && (
+          <div className="verification-warning">
+            <div className="warning-icon">⚠️</div>
+            <div className="warning-content">
+              <h3>Verification Required</h3>
+              <p>You need to upload and get your documents verified before you can add products.</p>
+              <button 
+                className="warning-btn" 
+                onClick={() => navigate('/upload-documents')}
+              >
+                Upload Documents
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className={`add-product-card ${!isVerified ? 'disabled-card' : ''}`}>
           <div className="add-product-header">
             <div className="header-icon">➕</div>
             <h2>Add New Product</h2>
@@ -220,9 +264,9 @@ const AddProduct = () => {
             <button 
               type="submit" 
               className="submit-btn-add agency"
-              disabled={loading}
+              disabled={loading || !isVerified}
             >
-              {loading ? 'Adding Product...' : 'Add Product & Submit for Approval'}
+              {loading ? 'Adding Product...' : !isVerified ? 'Verification Required' : 'Add Product & Submit for Approval'}
             </button>
           </form>
 

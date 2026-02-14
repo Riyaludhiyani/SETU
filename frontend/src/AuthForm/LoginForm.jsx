@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../services/api';
 import './AuthForm.css';
+import customerIcon from '../assets/customer-icon.svg';
+import agencyIcon from '../assets/agency-icon.svg';
+import adminIcon from '../assets/admin-icon.svg';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -80,7 +83,7 @@ const LoginForm = () => {
         <div className="form-card">
           <div className="form-header">
             <div className={`form-icon ${userType}`}>
-              {userType === 'customer' ? '👤' : userType === 'admin' ? '🛡️' : '🏢'}
+              <img src={userType === 'customer' ? customerIcon : userType === 'admin' ? adminIcon : agencyIcon} alt={userType} />
             </div>
             <h2>{userType === 'customer' ? 'Customer' : userType === 'admin' ? 'Admin' : 'Agency'} Login</h2>
             <p>Welcome back! Please login to continue</p>

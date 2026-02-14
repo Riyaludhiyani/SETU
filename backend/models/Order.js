@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema({
     orderNumber: {
         type: String,
-        required: true,
         unique: true
     },
     customer: {
@@ -110,11 +109,10 @@ const orderSchema = new mongoose.Schema({
 });
 
 // Generate order number
-orderSchema.pre('save', function(next) {
+orderSchema.pre('save', function() {
     if (!this.orderNumber) {
         this.orderNumber = 'ORD' + Date.now() + Math.floor(Math.random() * 1000);
     }
-    next();
 });
 
 module.exports = mongoose.model("Order", orderSchema);

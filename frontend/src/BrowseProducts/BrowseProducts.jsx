@@ -225,7 +225,7 @@ const BrowseProducts = () => {
               {products.map((product) => (
                 <div key={product._id} className="browse-product-card">
                   <div className="product-image-container">
-                    {product.images && product.images.length > 0 ? (
+                    {product.images && product.images.length > 0 && product.images[0].startsWith('http') ? (
                       <img src={product.images[0]} alt={product.title} className="product-image" />
                     ) : (
                       <div className="product-image-placeholder">

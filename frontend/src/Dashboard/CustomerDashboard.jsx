@@ -168,8 +168,8 @@ const CustomerDashboard = () => {
                     {Math.round(((product.originalPrice - product.sellingPrice) / product.originalPrice) * 100)}% OFF
                   </div>
                   <div className="product-image">
-                    {product.images && product.images.length > 0 ? (
-                      <img src={product.images[0]} alt={product.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    {product.images && product.images.length > 0 && product.images[0].startsWith('http') ? (
+                      <img src={product.images[0]} alt={product.title} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '0.5rem' }} />
                     ) : (
                       '📦'
                     )}

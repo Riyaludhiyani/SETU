@@ -1,6 +1,20 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './LandingPage.css';
+import logoImg from '../assets/logo.svg';
+import mobileImg from '../assets/mobile.svg';
+import couchImg from '../assets/couch.svg';
+import shirtImg from '../assets/shirt.svg';
+import checkImg from '../assets/check.svg';
+import lockImg from '../assets/lock.svg';
+import magnifyImg from '../assets/magnify.svg';
+import moneyImg from '../assets/money.svg';
+import fileImg from '../assets/file.svg';
+import buildingImg from '../assets/globe.svg';
+import globeImg from '../assets/globe.svg';
+import chartBarImg from '../assets/chart-bar.svg';
+import recycleImg from '../assets/recycle.svg';
+import arrowImg from '../assets/arrow.svg';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -11,7 +25,7 @@ const LandingPage = () => {
       <nav className="navbar">
         <div className="nav-container">
           <div className="logo">
-            <span className="logo-icon">🔓</span>
+            <span className="logo-icon"><img src={logoImg} alt="Setu logo" /></span>
             <span className="logo-text">Setu</span>
           </div>
           <div className="nav-links">
@@ -50,7 +64,7 @@ const LandingPage = () => {
             <div className="hero-cta">
               <button className="cta-primary" onClick={() => navigate('/signup')}>
                 Get Started Free
-                <span className="arrow">→</span>
+                <span className="arrow"><img src={arrowImg} alt="arrow" /></span>
               </button>
               <button className="cta-secondary" onClick={() => navigate('/login')}>
                 Sign In
@@ -73,25 +87,25 @@ const LandingPage = () => {
           </div>
           <div className="hero-visual">
             <div className="visual-card card-1">
-              <div className="card-icon">📱</div>
+              <div className="card-icon"><img src={mobileImg} alt="Electronics"/></div>
               <div className="card-text">Electronics</div>
               <div className="card-price">Up to 70% Off</div>
             </div>
             <div className="visual-card card-2">
-              <div className="card-icon">🏠</div>
+              <div className="card-icon"><img src={couchImg} alt="Furniture"/></div>
               <div className="card-text">Furniture</div>
               <div className="card-price">Premium Quality</div>
             </div>
             <div className="visual-card card-3">
-              <div className="card-icon">👕</div>
+              <div className="card-icon"><img src={shirtImg} alt="Clothing"/></div>
               <div className="card-text">Clothing</div>
               <div className="card-price">Brand New</div>
             </div>
             <div className="floating-badge badge-1">
-              <span className="badge-check">✓</span> Verified
+              <span className="badge-check"><img src={checkImg} alt="verified"/></span> Verified
             </div>
             <div className="floating-badge badge-2">
-              <span className="badge-check">🔒</span> Secure
+              <span className="badge-check"><img src={lockImg} alt="secure"/></span> Secure
             </div>
           </div>
         </div>
@@ -107,22 +121,22 @@ const LandingPage = () => {
           </div>
           <div className="problem-grid">
             <div className="problem-card">
-              <div className="problem-icon">🔍</div>
+              <div className="problem-icon"><img src={magnifyImg} alt="Low visibility"/></div>
               <h3>Low Visibility</h3>
               <p>Auction information scattered across multiple government portals</p>
             </div>
             <div className="problem-card">
-              <div className="problem-icon">💰</div>
+              <div className="problem-icon"><img src={moneyImg} alt="High costs"/></div>
               <h3>High Costs</h3>
               <p>Upfront fees and EMD requirements block public access</p>
             </div>
             <div className="problem-card">
-              <div className="problem-icon">📋</div>
+              <div className="problem-icon"><img src={fileImg} alt="Compliance"/></div>
               <h3>Complex Compliance</h3>
               <p>KYC, PAN, GST hurdles prevent easy participation</p>
             </div>
             <div className="problem-card">
-              <div className="problem-icon">🏢</div>
+              <div className="problem-icon"><img src={buildingImg} alt="Centralized power"/></div>
               <h3>Centralized Power</h3>
               <p>Middlemen control access to valuable auction opportunities</p>
             </div>
@@ -139,32 +153,32 @@ const LandingPage = () => {
           </div>
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">🌐</div>
+              <div className="feature-icon"><img src={globeImg} alt="Digital marketplace"/></div>
               <h3>Digital Marketplace</h3>
               <p>Centralized platform connecting buyers with verified government agencies</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">✓</div>
+              <div className="feature-icon"><img src={checkImg} alt="Verified sellers"/></div>
               <h3>Verified Sellers Only</h3>
               <p>All agencies undergo strict verification for your safety</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">📊</div>
+              <div className="feature-icon"><img src={chartBarImg} alt="Smart stock"/></div>
               <h3>Smart Stock Control</h3>
               <p>Real-time inventory tracking and automated updates</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">📈</div>
+              <div className="feature-icon"><img src={chartBarImg} alt="Tender tracking"/></div>
               <h3>Tender Tracking Dashboard</h3>
               <p>Monitor all active auctions and your bids in one place</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🔒</div>
+              <div className="feature-icon"><img src={lockImg} alt="Safe buys"/></div>
               <h3>Safe & Legal Buys</h3>
               <p>Every transaction is secure, verified, and fully compliant</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">♻️</div>
+              <div className="feature-icon"><img src={recycleImg} alt="Resource circularity"/></div>
               <h3>Resource Circularity</h3>
               <p>Reducing waste by giving seized goods a second life</p>
             </div>
@@ -185,19 +199,19 @@ const LandingPage = () => {
               <h3>Government Seizes Goods</h3>
               <p>Imported goods seized due to legal violations and unpaid customs</p>
             </div>
-            <div className="step-arrow">→</div>
+            <div className="step-arrow"><img src={arrowImg} alt="arrow"/></div>
             <div className="step">
               <div className="step-number">02</div>
               <h3>Agency Lists on Setu</h3>
               <p>Verified agencies upload goods for public auction after approval</p>
             </div>
-            <div className="step-arrow">→</div>
+            <div className="step-arrow"><img src={arrowImg} alt="arrow"/></div>
             <div className="step">
               <div className="step-number">03</div>
               <h3>You Browse & Buy</h3>
               <p>Discover products, place bids, and purchase at great prices</p>
             </div>
-            <div className="step-arrow">→</div>
+            <div className="step-arrow"><img src={arrowImg} alt="arrow"/></div>
             <div className="step">
               <div className="step-number">04</div>
               <h3>Secure Delivery</h3>
@@ -228,7 +242,7 @@ const LandingPage = () => {
         <div className="footer-container">
           <div className="footer-brand">
             <div className="logo">
-              <span className="logo-icon">🔓</span>
+              <span className="logo-icon"><img src={logoImg} alt="Setu logo" /></span>
               <span className="logo-text">Setu</span>
             </div>
             <p>Bridging the gap between government auctions and the public.</p>
@@ -236,21 +250,21 @@ const LandingPage = () => {
           <div className="footer-links">
             <div className="footer-column">
               <h4>Product</h4>
-              <a href="#features">Features</a>
-              <a href="#how-it-works">How It Works</a>
-              <a href="#about">About</a>
+              <Link to="/features">Features</Link>
+              <Link to="/how-it-works">How It Works</Link>
+              <Link to="/about">About</Link>
             </div>
             <div className="footer-column">
               <h4>Legal</h4>
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms of Service</a>
-              <a href="#">Compliance</a>
+              <Link to="/privacy">Privacy Policy</Link>
+              <Link to="/terms">Terms of Service</Link>
+              <Link to="/compliance">Compliance</Link>
             </div>
             <div className="footer-column">
               <h4>Support</h4>
-              <a href="#">Help Center</a>
-              <a href="#">Contact Us</a>
-              <a href="#">FAQ</a>
+              <Link to="/help">Help Center</Link>
+              <Link to="/contact">Contact Us</Link>
+              <Link to="/faq">FAQ</Link>
             </div>
           </div>
         </div>

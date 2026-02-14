@@ -124,6 +124,10 @@ const AdminDashboard = () => {
             <span className="nav-icon">🏠</span>
             <span>Dashboard</span>
           </a>
+          <a href="#" className="nav-item" onClick={() => navigate('/document-approval')}>
+            <span className="nav-icon">📄</span>
+            <span>Document Approval</span>
+          </a>
           <a href="#" className="nav-item" onClick={() => navigate('/admin/pending-products')}>
             <span className="nav-icon">⏳</span>
             <span>Pending Approvals</span>
@@ -138,6 +142,10 @@ const AdminDashboard = () => {
           <a href="#" className="nav-item" onClick={() => navigate('/admin/users')}>
             <span className="nav-icon">👥</span>
             <span>Users</span>
+          </a>
+          <a href="#" className="nav-item" onClick={() => navigate('/admin/analytics')}>
+            <span className="nav-icon">📊</span>
+            <span>Analytics</span>
           </a>
           <a href="#" className="nav-item" onClick={() => navigate('/admin/settings')}>
             <span className="nav-icon">⚙️</span>
@@ -256,7 +264,7 @@ const AdminDashboard = () => {
                 {pendingProducts.map((product) => (
                   <div key={product._id} className="product-list-item admin-list-item">
                     <div className="product-image-thumb">
-                      {product.images && product.images.length > 0 ? (
+                      {product.images && product.images.length > 0 && product.images[0].startsWith('http') ? (
                         <img src={product.images[0]} alt={product.title} />
                       ) : (
                         <div className="no-image">📷</div>

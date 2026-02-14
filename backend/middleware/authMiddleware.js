@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.js");
 
-module.exports = (roles = []) => {
+const authMiddleware = (roles = []) => {
     return async (req, res, next) => {
         try {
             const token = req.headers.authorization?.replace('Bearer ', '');
@@ -26,6 +26,7 @@ module.exports = (roles = []) => {
             // Attach user to request
             req.user = {
                 id: user._id,
+                _id: user._id,
                 name: user.name,
                 email: user.email,
                 role: user.role
@@ -38,3 +39,18 @@ module.exports = (roles = []) => {
         }
     };
 };
+
+// Named exports for convenience
+const protect = authMiddleware();
+const agencyOnly = authMiddleware(['agency']);
+const adminOnly = authMiddleware(['admin']);
+const customerOnly = authMiddleware(['customer']);
+
+// Default export for backward compatibility
+module.exports = authMiddleware;
+
+// Named exports
+module.exports.protect = protect;
+module.exports.agencyOnly = agencyOnly;
+module.exports.adminOnly = adminOnly;
+module.exports.customerOnly = customerOnly;

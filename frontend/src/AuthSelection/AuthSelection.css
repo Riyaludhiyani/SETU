@@ -134,6 +134,14 @@ body {
   animation: float 3s ease-in-out infinite;
 }
 
+.card-icon img {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }

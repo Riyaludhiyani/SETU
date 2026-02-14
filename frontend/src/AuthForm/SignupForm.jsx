@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../services/api';
 import './AuthForm.css';
+import customerIcon from '../assets/customer-icon.svg';
+import agencyIcon from '../assets/agency-icon.svg';
+import adminIcon from '../assets/admin-icon.svg';
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -17,7 +20,7 @@ const SignupForm = () => {
           </button>
           <div className="form-card">
             <div className="form-header">
-              <div className="form-icon admin">🛡️</div>
+              <div className="form-icon admin"><img src={adminIcon} alt="Admin" /></div>
               <h2>Admin Registration</h2>
               <p>Admin accounts cannot be created through public registration</p>
             </div>
@@ -106,7 +109,7 @@ const SignupForm = () => {
         <div className="form-card">
           <div className="form-header">
             <div className="form-icon">
-              {userType === 'customer' ? '👤' : '🏢'}
+              <img src={userType === 'customer' ? customerIcon : agencyIcon} alt={userType} />
             </div>
             <h2>Create {userType === 'customer' ? 'Customer' : 'Agency'} Account</h2>
             <p>Join Setu and start {userType === 'customer' ? 'browsing great deals' : 'listing your products'}</p>
